@@ -20,8 +20,8 @@ The backend is built using a serverless architecture on AWS:
 ```bash
 backend/
 ├── lambda_function.py   # The main logic for updating the database
-├── tests/               # Unit and integration tests (To Be Added)
-├── template.yaml        # AWS SAM Infrastructure definition (To Be Added)
+├── tests/               # Unit and integration tests 
+├── template.yaml        # AWS SAM Infrastructure definition 
 └── README.md            # This file
 ```
 
