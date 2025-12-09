@@ -39,7 +39,7 @@ This repository is organized into the following components. Click the links to v
 | :--- | :--- | :--- |
 | **[📂 FrontEnd](./FrontEnd)** | HTML, CSS, and JS code for the resume website. | Completed
 | **[📂 BackEnd](./BackEnd)** | Python Lambda functions, API definitions and tests. | Completed
-| **[📂 Infrastructure](./Infrastructure)** | IaC templates (Terraform/SAM) for AWS resources. | Under constrcution
+| **[📂 Infrastructure](./Infrastructure)** | IaC templates (Terraform/SAM) for AWS resources. | Working on it
 
 ---
 
