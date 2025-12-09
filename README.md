@@ -6,7 +6,7 @@ This project transforms a traditional resume into a serverless web application h
 
 ## 🔗 Quick Links
 * **Live Website:** [https://konstantinos.space](https://konstantinos.space)
-* **Blog Post:** [Link to your future LinkedIn/Medium article]
+* **Blog Post:** [working on it]
 
 ---
 
