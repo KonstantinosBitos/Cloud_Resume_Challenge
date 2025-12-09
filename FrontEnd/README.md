@@ -15,7 +15,8 @@ This static website is deployed on AWS using a serverless architecture:
 * **Frontend:** HTML5, CSS3, JavaScript
 * **Infrastructure:** AWS S3, CloudFront, Route 53 / Namecheap DNS
 
-## 🚀 Next Steps
+## 🚀 Next Steps - **COMPLETED**
+
 I am currently working on the backend, which will include:
 * **DynamoDB** table for visitor counting.
 * **AWS Lambda** (Python) for serverless logic.
