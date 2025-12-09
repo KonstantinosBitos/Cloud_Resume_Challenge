@@ -19,7 +19,7 @@ The frontend is a static site (HTML/CSS/JS) hosted on **Amazon S3** and distribu
 * **Security:** Secured with HTTPS using **AWS Certificate Manager (ACM)** and restricted via **Origin Access Control (OAC)**.
 * **DNS:** Managed via **Namecheap** pointing to AWS.
 
-### **Backend (In Progress)**
+### **Backend **
 The backend handles the "Visitor Counter" feature.
 * **Database:** **Amazon DynamoDB** (On-demand capacity) stores the view count.
 * **Compute:** **AWS Lambda** (Python) updates the count atomically.
@@ -37,22 +37,9 @@ This repository is organized into the following components. Click the links to v
 
 | Folder | Description | Status |
 | :--- | :--- | :--- |
-| **[📂 frontend](./frontend)** | HTML, CSS, and JS code for the resume website. | ✅ Complete |
-| **[📂 backend](./backend)** | Python Lambda functions and API definitions. | 🚧 In Progress |
-| **[📂 infrastructure](./infrastructure)** | IaC templates (Terraform/SAM) for AWS resources. | 📅 Planned |
-
----
-
-## 🚀 Key Learnings
-
-### Phase 1: Cloud & Security
-* Configuring **CloudFront** for global content delivery.
-* Implementing **Origin Access Control (OAC)** to enforce strict security policies on S3 buckets.
-* Managing DNS records and **SSL/TLS Certificates** for custom domains.
-
-### Phase 2: Serverless Backend (Current Focus)
-* Designing NoSQL schemas with **DynamoDB**.
-* Writing Python **Lambda** functions for event-driven logic.
+| **[📂 frontend](./frontend)** | HTML, CSS, and JS code for the resume website. 
+| **[📂 backend](./backend)** | Python Lambda functions, API definitions and tests. 
+| **[📂 infrastructure](./infrastructure)** | IaC templates (Terraform/SAM) for AWS resources.
 
 ---
 
