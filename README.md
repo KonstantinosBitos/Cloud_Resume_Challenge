@@ -19,7 +19,7 @@ The frontend is a static site (HTML/CSS/JS) hosted on **Amazon S3** and distribu
 * **Security:** Secured with HTTPS using **AWS Certificate Manager (ACM)** and restricted via **Origin Access Control (OAC)**.
 * **DNS:** Managed via **Namecheap** pointing to AWS.
 
-### **Backend **
+### **Backend**
 The backend handles the "Visitor Counter" feature.
 * **Database:** **Amazon DynamoDB** (On-demand capacity) stores the view count.
 * **Compute:** **AWS Lambda** (Python) updates the count atomically.
