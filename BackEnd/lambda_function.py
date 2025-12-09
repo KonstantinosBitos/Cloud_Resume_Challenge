@@ -37,5 +37,5 @@ def lambda_handler(event, context):
             'Access-Control-Allow-Headers': 'Content-Type',
             'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
         },
-        'body': json.dumps(new_count)
+        'VisitorCount': json.dumps(new_count)
     }
