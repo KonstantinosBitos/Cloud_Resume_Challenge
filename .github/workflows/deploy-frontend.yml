@@ -1,0 +1,43 @@
+name: Deploy Frontend
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'frontend/**'
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          role-to-assume: arn:aws:iam::535462129366:role/GitHubDeployRole
+          aws-region: us-east-1
+
+      - name: Deploy to S3
+        env:
+          BUCKET_NAME: "konstantinos-cloud-resume-bucket" 
+        run: |
+          aws s3 sync ./frontend s3://$BUCKET_NAME --delete
+
+      - name: Invalidate CloudFront Cache
+        run: |
+          # Find the distribution ID based on the domain name
+          DIST_ID=$(aws cloudfront list-distributions --query "DistributionList.Items[?Aliases.Items!=null] | [?contains(Aliases.Items, 'konstantinos.space')].Id | [0]" --output text)
+          
+          if [ "$DIST_ID" != "None" ]; then
+            echo "Found Distribution ID: $DIST_ID"
+            aws cloudfront create-invalidation --distribution-id $DIST_ID --paths "/*"
+          else
+            echo "CloudFront distribution not found or not yet active."
+          fi

@@ -13,15 +13,15 @@ permissions:
   contents: read
 
 jobs:
-  terraform:
-    name: 'Deploy Terraform'
+  deploy-and-test:
+    name: 'Deploy & Test'
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./infrastructure 
 
     steps:
-      # Checkout the code to the runner
+      # Checkout the code
       - name: Checkout Code
         uses: actions/checkout@v3
 
@@ -32,7 +32,7 @@ jobs:
           role-to-assume: arn:aws:iam::535462129366:role/GitHubDeployRole
           aws-region: us-east-1
 
-      # Install Terraform on the runner
+      # Install Terraform
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
@@ -43,3 +43,19 @@ jobs:
       # Apply Changes
       - name: Terraform Apply
         run: terraform apply -auto-approve
+
+      # Capture the API URL from Terraform output
+      - name: Get API URL
+        id: get_url
+        run: |
+          echo "API_URL=$(terraform output -raw api_endpoint)" >> $GITHUB_ENV
+
+      # Run the Python Smoke Test
+      - name: Run Smoke Tests
+        working-directory: ./backend 
+        run: |
+          pip install requests
+          python Tests/Smoke_test.py
+        env:
+          # Pass the URL we captured in to the Python script
+          API_URL: ${{ env.API_URL }}
