@@ -1,0 +1,45 @@
+name: Deploy Backend & Infrastructure
+
+on:
+  push:
+    branches:
+      - main  
+    paths:
+      - 'infrastructure/**' # Only run if infrastructure changes
+      - 'backend/**'        # or if Python code changes
+
+permissions:
+  id-token: write 
+  contents: read
+
+jobs:
+  terraform:
+    name: 'Deploy Terraform'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./infrastructure 
+
+    steps:
+      # Checkout the code to the runner
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Log in to AWS using the OIDC Role
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          role-to-assume: arn:aws:iam::535462129366:role/GitHubDeployRole
+          aws-region: us-east-1
+
+      # Install Terraform on the runner
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      # Initialize Terraform 
+      - name: Terraform Init
+        run: terraform init
+
+      # Apply Changes
+      - name: Terraform Apply
+        run: terraform apply -auto-approve

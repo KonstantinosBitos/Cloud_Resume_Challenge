@@ -19,11 +19,11 @@ resource "aws_iam_role" "github_deploy_role" {
         }
         Condition = {
           StringLike = {
-            "token.actions.githubusercontent.com:sub" = "repo:https://github.com/KonstantinosBitos/Cloud_Resume_Challenge:*"
+            "token.actions.githubusercontent.com:sub" = "repo:KonstantinosBitos/Cloud_Resume_Challenge:*"
           }
         }
       }
-    ]
+    ]   
   })
 }
 

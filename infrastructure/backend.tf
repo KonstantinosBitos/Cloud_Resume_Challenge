@@ -32,8 +32,6 @@ resource "aws_iam_role_policy" "dynamodb_access" {
   })
 }
 
-
-
 # Existing DynamoDB Table
 resource "aws_dynamodb_table" "visitor_counter" {
   name         = "VisitorCounter" 
@@ -117,7 +115,7 @@ resource "aws_lambda_permission" "apigw_invoke" {
   source_arn    = "${aws_apigatewayv2_api.http_api.execution_arn}/*/*"
 }
 
-# 6. Output the URL to use with JS
+# Output the URL to use with JS
 output "api_endpoint" {
   value = aws_apigatewayv2_api.http_api.api_endpoint
 }
