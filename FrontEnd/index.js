@@ -1,4 +1,4 @@
-fetch('https://ey7gl2zki2.execute-api.eu-north-1.amazonaws.com/MyFirstStage/visitor_count', {
+fetch('https://jx16zysyf2.execute-api.eu-north-1.amazonaws.com/visitor_count', {
     method: 'POST'
 })
     .then(response => response.json())

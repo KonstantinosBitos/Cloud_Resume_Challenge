@@ -1,12 +1,12 @@
-name: Deploy Backend & Infrastructure
+name: Deploy Backend & Infrastructure (V2)
 
 on:
   push:
     branches:
       - main  
     paths:
-      - 'infrastructure/**' # Only run if infrastructure changes
-      - 'backend/**'        # or if Python code changes
+      - 'infrastructure-v2/**' # Watches the new folder
+      - 'backend/**'           # Watches the Python code
 
 permissions:
   id-token: write 
@@ -18,18 +18,18 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./infrastructure 
-
+        working-directory: ./infrastructure-v2 
     steps:
       # Checkout the code
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Log in to AWS using the OIDC Role
+      # Log in to AWS using the V2 Role
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
-          role-to-assume: arn:aws:iam::535462129366:role/GitHubDeployRole
+          # Use the secret we updated
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }} 
           aws-region: us-east-1
 
       # Install Terraform
@@ -47,15 +47,15 @@ jobs:
       # Capture the API URL from Terraform output
       - name: Get API URL
         id: get_url
+        # looking for 'api_endpoint_v2' now
         run: |
-          echo "API_URL=$(terraform output -raw api_endpoint)" >> $GITHUB_ENV
+          echo "API_URL=$(terraform output -raw api_endpoint_v2)" >> $GITHUB_ENV
 
       # Run the Python Smoke Test
       - name: Run Smoke Tests
-        working-directory: ./backend 
+        working-directory: ../backend # Adjust path relative to infrastructure-v2
         run: |
           pip install requests
           python Tests/Smoke_test.py
         env:
-          # Pass the URL we captured in to the Python script
           API_URL: ${{ env.API_URL }}

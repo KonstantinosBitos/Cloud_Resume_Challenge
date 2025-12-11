@@ -1,4 +1,4 @@
-name: Deploy Frontend
+name: Deploy Frontend (V2)
 
 on:
   push:
@@ -21,23 +21,26 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
-          role-to-assume: arn:aws:iam::535462129366:role/GitHubDeployRole
+          # Use the secret
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: us-east-1
 
       - name: Deploy to S3
         env:
-          BUCKET_NAME: "konstantinos-cloud-resume-bucket" 
+          # Use the secret
+          BUCKET_NAME: ${{ secrets.AWS_BUCKET_NAME }} 
         run: |
           aws s3 sync ./frontend s3://$BUCKET_NAME --delete
 
       - name: Invalidate CloudFront Cache
         run: |
-          # Find the distribution ID based on the domain name
-          DIST_ID=$(aws cloudfront list-distributions --query "DistributionList.Items[?Aliases.Items!=null] | [?contains(Aliases.Items, 'konstantinos.space')].Id | [0]" --output text)
+          # CHANGED: Now looks for the V2 domain alias
+          DIST_ID=$(aws cloudfront list-distributions --query "DistributionList.Items[?Aliases.Items!=null] | [?contains(Aliases.Items, 'v2.konstantinos.space')].Id | [0]" --output text)
           
-          if [ "$DIST_ID" != "None" ]; then
+          if [ "$DIST_ID" != "None" ] && [ "$DIST_ID" != "" ]; then
             echo "Found Distribution ID: $DIST_ID"
             aws cloudfront create-invalidation --distribution-id $DIST_ID --paths "/*"
           else
-            echo "CloudFront distribution not found or not yet active."
+            echo "CloudFront distribution for v2.konstantinos.space not found."
+            exit 1
           fi
