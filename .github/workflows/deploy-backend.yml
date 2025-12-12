@@ -53,7 +53,7 @@ jobs:
 
       # Run the Python Smoke Test
       - name: Run Smoke Tests
-        working-directory: ../backend # Adjust path relative to infrastructure-v2
+        working-directory: ./backend # Adjust path relative to infrastructure-v2
         run: |
           pip install requests
           python Tests/Smoke_test.py
