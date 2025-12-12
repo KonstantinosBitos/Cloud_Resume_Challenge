@@ -16,7 +16,7 @@ class TestAPISmoke(unittest.TestCase):
 
         api_endpoint = f"{base_url.rstrip('/')}/visitor_count"
 
-        print(f"Testing API at: {self.API_URL}")
+        print(f"Testing API at: {API_URL}")
 
 
         
