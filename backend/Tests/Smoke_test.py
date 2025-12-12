@@ -14,11 +14,9 @@ class TestAPISmoke(unittest.TestCase):
         if not base_url:
             self.fail("API_URL environment variable is missing. Cannot run smoke test.")
 
-        api_endpoint = f"{base_url.rstrip('/')}/visitor_count"
+        API_URL = f"{base_url.rstrip('/')}/visitor_count"
 
         print(f"Testing API at: {API_URL}")
-
-
         
         # Make the API Call
         try:
