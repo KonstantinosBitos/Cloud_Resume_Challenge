@@ -1,4 +1,25 @@
 terraform {
+  backend "s3" {
+    bucket         = "konstantinos-tf-state-1" 
+    key            = "v2/terraform.tfstate"
+    region         = "eu-north-1"
+    dynamodb_table = "terraform-locks"
+    encrypt        = true
+  }
+ 
+
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+}
+
+# ... rest of your file ...
+
+
+terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
