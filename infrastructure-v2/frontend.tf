@@ -3,7 +3,7 @@ resource "aws_s3_bucket" "resume_bucket_v2" {
   bucket = "konstantinos-cloud-resume-bucket-v2" 
 }
 
-# Block Public Access - V2
+# Block Public Access - V2 
 resource "aws_s3_bucket_public_access_block" "block_public_v2" {
   bucket = aws_s3_bucket.resume_bucket_v2.id
 
