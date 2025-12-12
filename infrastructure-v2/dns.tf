@@ -5,7 +5,7 @@ data "aws_route53_zone" "main" {
 # Create the SSL Certificate for the subdomain
 resource "aws_acm_certificate" "cert_v2" {
   provider          = aws.us_east_1 # CloudFront requires certs in us-east-1
-  domain_name       = "v2.konstantinos.space"
+  domain_name       = "konstantinos.space"
   validation_method = "DNS"
 
   lifecycle {
@@ -40,10 +40,10 @@ resource "aws_acm_certificate_validation" "cert_valid_v2" {
   validation_record_fqdns = [for record in aws_route53_record.cert_validation_v2 : record.fqdn]
 }
 
-# Point the subdomain (v2.konstantinos.space) to the V2 CloudFront Distribution
+# Point the subdomain (konstantinos.space) to the V2 CloudFront Distribution
 resource "aws_route53_record" "website_alias_v2" {
   zone_id = data.aws_route53_zone.main.zone_id
-  name    = "v2.konstantinos.space"
+  name    = "konstantinos.space"
   type    = "A"
 
   alias {

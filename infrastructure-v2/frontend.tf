@@ -31,7 +31,7 @@ resource "aws_cloudfront_distribution" "cf_dist_v2" {
   }
 
   # Once V2 is perfect, you can swap this back to the main domain.
-  aliases = ["v2.konstantinos.space"]
+  aliases = ["konstantinos.space"]
 
   # References the V2 certificate 
   viewer_certificate {
