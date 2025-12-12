@@ -3,13 +3,21 @@ import requests
 import json
 
 class TestAPISmoke(unittest.TestCase):
-    API_URL = "https://ey7gl2zki2.execute-api.eu-north-1.amazonaws.com/MyFirstStage"
-
+    
     def test_api_is_live(self):
         """
         Verifies the API is reachable and returns a valid visitor count.
         """
+        base_url = os.environ.get("API_URL")
+        
+        if not base_url:
+            self.fail("API_URL environment variable is missing. Cannot run smoke test.")
+
+        #api_endpoint = f"{base_url.rstrip('/')}/visitor_count"
+
         print(f"Testing API at: {self.API_URL}")
+
+
         
         # Make the API Call
         try:
