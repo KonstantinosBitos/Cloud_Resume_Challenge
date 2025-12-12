@@ -12,10 +12,11 @@ def lambda_handler(event, context):
         Key={
             'id': '1'
         },
-        # Fix: Use '#v' instead of 'views' because 'views' is a reserved word
+
+        # Use '#v' instead of 'views' because 'views' is a reserved word
         UpdateExpression='SET #v = #v + :val',
         
-        # Fix: Tell DynamoDB that '#v' means 'views'
+        # Tell DynamoDB that '#v' means 'views'
         ExpressionAttributeNames={
             '#v': 'views'
         },
@@ -28,8 +29,9 @@ def lambda_handler(event, context):
     
     new_count = int(response['Attributes']['views'])
     
-    #Print to logs
-    print("Update successful! New count is:", new_count)
+    views = response.get('Attributes', {}).get('views', 0)
+    if isinstance(views, Decimal):
+        views = int(views)
     
     #Return the value
     return {
@@ -39,5 +41,5 @@ def lambda_handler(event, context):
             'Access-Control-Allow-Headers': 'Content-Type',
             'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
         },
-        'VisitorCount': json.dumps(new_count)
+        'body': json.dumps({'count': views})
     }
