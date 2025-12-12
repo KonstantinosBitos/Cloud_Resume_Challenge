@@ -10,8 +10,8 @@ table = dynamodb.Table(table_name)
 
 def lambda_handler(event, context):
     try:
-        # 1. Update the count (Atomic Increment)
-        # 'if_not_exists' fixes the error by initializing the counter if it's missing
+        #Update the count (Atomic Increment)
+        # 'if_not_exists' initializing the counter if it's missing
         response = table.update_item(
             Key={'id': '1'},
             UpdateExpression='SET #v = if_not_exists(#v, :zero) + :val',
@@ -23,13 +23,13 @@ def lambda_handler(event, context):
             ReturnValues="UPDATED_NEW"
         )
         
-        # 2. Get the new view count safely
+        # Get the new view count safely
         views = response.get('Attributes', {}).get('views', 0)
         
         if isinstance(views, Decimal):
             views = int(views)
 
-        # 3. Return the response CORRECTLY for API Gateway Proxy
+        # Return the response for API Gateway Proxy
         return {
             'statusCode': 200,
             'headers': {
@@ -41,7 +41,7 @@ def lambda_handler(event, context):
         }
 
     except Exception as e:
-        print(f"ERROR: {str(e)}") # This will show up in CloudWatch logs
+        print(f"ERROR: {str(e)}") # show up in CloudWatch logs
         return {
             'statusCode': 500,
             'headers': {
