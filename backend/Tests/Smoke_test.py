@@ -20,7 +20,7 @@ class TestAPISmoke(unittest.TestCase):
         
         # Make the API Call
         try:
-            response = requests.post(self.API_URL)
+            response = requests.post(API_URL)
         except requests.exceptions.ConnectionError:
             self.fail("Could not connect to the API")
 
