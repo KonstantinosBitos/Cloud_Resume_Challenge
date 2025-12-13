@@ -1,8 +1,9 @@
 # Infrastructure (Terraform)
 
-This directory contains the **Infrastructure as Code (IaC)** for the Cloud Resume Challenge. It uses [Terraform](https://www.terraform.io/) to provision and manage all AWS resources automatically, ensuring the environment is reproducible, version-controlled, and consistent.
+This directory contains the Infrastructure as Code (IaC) for my cloud hosted resume. 
+It uses Terraform to provision and manage all AWS resources automatically, ensuring the environment is reproducible, version-controlled, and consistent.
 
-## 🏗 Architecture
+## Architecture
 
 The infrastructure deploys a serverless full-stack application on AWS:
 
@@ -34,3 +35,27 @@ To deploy this infrastructure locally, you need:
 Initialize Terraform to download providers and configure the remote backend:
 ```bash
 terraform init
+```
+
+### 2. Planning
+Preview the changes Terraform will make to your AWS account:
+```bash
+terraform plan
+```
+
+### 3. Deployment
+Apply the configuration to create or update resources:
+```bash
+terraform apply
+```
+
+## 📂 File Structure
+
+* **`main.tf`**: Provider configuration (AWS) and backend setup.
+* **`frontend.tf`**: S3, CloudFront, and ACM resources.
+* **`backend.tf`**: Lambda, API Gateway, and DynamoDB resources.
+* **`dns.tf`**: Route53 records and domain validation.
+* **`oidc.tf`**: IAM OpenID Connect provider for GitHub Actions.
+* **`outputs.tf`**: Definitions of useful data returned after deployment (e.g., API Endpoint).
+
+
