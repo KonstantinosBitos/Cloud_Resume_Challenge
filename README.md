@@ -4,13 +4,13 @@ This repository contains the source code and infrastructure configuration for my
 
 This project transforms a traditional resume into a serverless web application hosted entirely on AWS.
 
-## 🔗 Quick Links
+## Quick Links
 * **Live Website:** [https://konstantinos.space](https://konstantinos.space)
 * **Blog Post:** [working on it]
 
 ---
 
-## 🏗️ Architecture Overview
+## Architecture Overview
 
 This project is a full-stack serverless application.
 
@@ -31,15 +31,15 @@ The backend handles the "Visitor Counter" feature.
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 This repository is organized into the following components. Click the links to view technical details for each part:
 
 | Folder | Description | Status |
 | :--- | :--- | :--- |
-| **[📂 FrontEnd](./FrontEnd)** | HTML, CSS, and JS code for the resume website. | Completed
-| **[📂 BackEnd](./BackEnd)** | Python Lambda functions, API definitions and tests. | Completed
-| **[📂 Infrastructure](./Infrastructure)** | IaC templates (Terraform/SAM) for AWS resources. | Working on it
+| **[frontend](./FrontEnd)** | HTML, CSS, and JS code for the resume website. | Completed
+| **[backend](./BackEnd)** | Python Lambda functions, API definitions and tests. | Completed
+| **[infrastructure](./Infrastructure)** | IaC templates (Terraform/SAM) for AWS resources. | Working on it
 
 ---
 
