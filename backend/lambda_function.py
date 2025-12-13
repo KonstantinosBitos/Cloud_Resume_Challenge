@@ -11,7 +11,7 @@ table = dynamodb.Table(table_name)
 def lambda_handler(event, context):
     try:
         # Update the count or initialize if it doesn't exist
-        # Views is a taken keyword 
+        # Views is a taken keyword so we use #v as an alias
         response = table.update_item(
             Key={'id': '1'},
             UpdateExpression='SET #v = if_not_exists(#v, :zero) + :val',
