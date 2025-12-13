@@ -22,3 +22,9 @@ The website is a static site deployed on AWS using a serverless architecture:
 The deployment is automated via GitHub Actions. When changes are pushed to the `main` branch:
 * Files are synced to the S3 bucket.
 * The CloudFront cache is invalidated to ensure users see the latest version immediately.
+
+## File Structure
+
+* **`index.html`**: The main entry point for the website, containing the resume structure and content.
+* **`styles.css`**: Contains all the styling rules, layout definitions, and responsive design adjustments.
+* **`app.js`**: JavaScript logic that handles the API call to fetch and update the visitor count.
