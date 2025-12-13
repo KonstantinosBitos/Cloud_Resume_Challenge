@@ -26,13 +26,21 @@ The backend follows a completely serverless microservices pattern:
 {
   "count": 42
 }
+```
 
 ## Testing
 
 CI/CD Integration: Every push to main triggers a GitHub Action that:
 
 Packages the Python code.
-
 Deploys the Lambda function via Terraform.
-
 Runs a live smoke test against the deployed API to verify health.
+
+## Deployment
+
+The deployment is automated via GitHub Actions. When changes are pushed to the main branch:
+
+Package: The Python code is zipped into a deployment package.
+Provision: Terraform applies the changes to AWS (updating the Lambda function or infrastructure).
+Verify: A live smoke test runs against the API endpoint to ensure the system is healthy.
+
