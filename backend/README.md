@@ -32,7 +32,7 @@ The backend follows a completely serverless microservices pattern:
 
 The deployment is automated via GitHub Actions. When changes are pushed to the `main` branch:
 
-* **Package**: The Python code is zipped into a deployment package.
-* **Provision**: Terraform applies the changes to AWS (updating the Lambda function or infrastructure).
-* **Verify**: A live smoke test runs against the API endpoint to ensure the system is healthy.
+* The Python code is zipped into a deployment package.
+* Terraform applies the changes to AWS (updating the Lambda function or infrastructure).
+* A live smoke test runs against the API endpoint to ensure the system is healthy.
 
