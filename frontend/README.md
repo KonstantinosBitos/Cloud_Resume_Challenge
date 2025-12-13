@@ -1,23 +1,26 @@
-# AWS Cloud Resume Challenge - Frontend ️
+# Cloud Resume Challenge - Frontend 
 
-This repository contains the frontend code for my cloud-hosted resume, built as part of the [Cloud Resume Challenge](https://cloudresumechallenge.dev/).
+This directory contains the frontend code for my cloud-hosted resume, built as part of the [Cloud Resume Challenge](https://cloudresumechallenge.dev/).
 
 **Live Site:** [https://konstantinos.space](https://konstantinos.space)
 
-## Architecture
-This static website is deployed on AWS using a serverless architecture:
-* **Amazon S3:** Stores the HTML and CSS files.
-* **Amazon CloudFront:** Content Delivery Network (CDN) for global caching and HTTPS enforcement.
-* **AWS Certificate Manager (ACM):** Provides the SSL certificate for secure connections.
-* **Origin Access Control (OAC):** Secures the S3 bucket so it is only accessible via CloudFront (no public bucket access).
+## 🏗 Architecture
 
-## Tech Stack
-* **Frontend:** HTML5, CSS3, JavaScript
-* **Infrastructure:** AWS S3, CloudFront, Route 53 / Namecheap DNS
+The website is a static site deployed on AWS using a serverless architecture:
 
-## Next Steps - **COMPLETED**
+* **Amazon S3:** Hosts the static HTML, CSS, and JavaScript files.
+* **Amazon CloudFront:** Content Delivery Network (CDN) for global low-latency caching and HTTPS enforcement.
+* **AWS Certificate Manager (ACM):** Provisions the SSL/TLS certificate for secure connections.
+* **Origin Access Control (OAC):** Restricts S3 bucket access so content is only viewable through CloudFront (no direct public access).
 
-I am currently working on the backend, which will include:
-* **DynamoDB** table for visitor counting.
-* **AWS Lambda** (Python) for serverless logic.
-* **API Gateway** to connect the frontend to the backend.
+## 🛠 Tech Stack
+
+* **Frontend:** HTML5, CSS3, JavaScript (Vanilla)
+* **Infrastructure:** AWS S3, CloudFront, Route 53
+* **CI/CD:** GitHub Actions (Automatic invalidation and sync on push)
+
+## 🚀 Deployment
+
+The deployment is automated via GitHub Actions. When changes are pushed to the `main` branch:
+1.  Files are synced to the S3 bucket.
+2.  The CloudFront cache is invalidated to ensure users see the latest version immediately.
