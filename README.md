@@ -37,7 +37,7 @@ This project is a full-stack serverless application designed for scalability, se
 * **[`backend/`](./backend)**
     * `lambda_function.py`: The main Python script containing the Lambda handler and logic to interact with DynamoDB.
     * `tests/`: Directory containing tests.
-       * 'Smoke_test.py`: Test cases to verify the Lambda logic.
+       * `Smoke_test.py`: Test cases to verify the Lambda logic.
 
 * **[`infrastructure/`](./infrastructure)**
     * `main.tf`: Provider setup and backend configuration.
