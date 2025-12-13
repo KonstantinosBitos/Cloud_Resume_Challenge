@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./infrastructure-v2 
+        working-directory: ./infrastructure
     steps:
       # Checkout the code
       - name: Checkout Code
