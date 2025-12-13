@@ -2,7 +2,7 @@
 
 This repository contains the source code and infrastructure configuration for my Cloud Resume Challenge.
 
-This project transforms a traditional resume into a serverless web application hosted entirely on AWS. It demonstrates skills in **Cloud Infrastructure**, **Security**, **Automation (CI/CD)**, and **Frontend/Backend Development**.
+This project transforms a traditional resume into a serverless web application hosted entirely on AWS.
 
 ## 🔗 Quick Links
 * **Live Website:** [https://konstantinos.space](https://konstantinos.space)
@@ -15,15 +15,15 @@ This project transforms a traditional resume into a serverless web application h
 This project is a full-stack serverless application.
 
 ### **Frontend**
-The frontend is a static site (HTML/CSS/JS) hosted on **Amazon S3** and distributed globally via **Amazon CloudFront**.
-* **Security:** Secured with HTTPS using **AWS Certificate Manager (ACM)** and restricted via **Origin Access Control (OAC)**.
-* **DNS:** Managed via **Namecheap** pointing to AWS.
+The frontend is a static site (HTML/CSS/JS) hosted on Amazon S3 and distributed globally via Amazon CloudFront.
+* **Security:** Secured with HTTPS using AWS Certificate Manager (ACM) and restricted via Origin Access Control (OAC).
+* **DNS:** Managed via Namecheap pointing to AWS.
 
 ### **Backend**
 The backend handles the "Visitor Counter" feature.
-* **Database:** **Amazon DynamoDB** (On-demand capacity) stores the view count.
-* **Compute:** **AWS Lambda** (Python) updates the count atomically.
-* **API:** **Amazon API Gateway** exposes the Lambda function to the frontend.
+* **Database:** Amazon DynamoDB (On-demand capacity) stores the view count.
+* **Compute:** AWS Lambda (Python) updates the count atomically.
+* **API:** Amazon API Gateway exposes the Lambda function to the frontend.
 
 ### **Automation**
 * **CI/CD:** GitHub Actions pipelines automatically test and deploy changes to AWS.
