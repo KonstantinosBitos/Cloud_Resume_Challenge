@@ -38,6 +38,3 @@ The infrastructure deploys a serverless full-stack application on AWS:
 * **`backend.tf`**: Lambda, API Gateway, and DynamoDB resources.
 * **`dns.tf`**: Route53 records and domain validation.
 * **`oidc.tf`**: IAM OpenID Connect provider for GitHub Actions.
-* **`outputs.tf`**: Definitions of useful data returned after deployment (e.g., API Endpoint).
-
-
