@@ -3,6 +3,15 @@
 This directory contains the Infrastructure as Code (IaC) for my cloud hosted resume. 
 It uses Terraform to provision and manage all AWS resources automatically, ensuring the environment is reproducible, version-controlled, and consistent.
 
+When applied, this Terraform configuration performs the following actions:
+
+1.  **Sets up Security:** Configures OIDC authentication so GitHub Actions can deploy safely without long-lived access keys.
+2.  **Provisions Storage:** Creates an S3 bucket for the website and blocks all public access (enforcing security best practices).
+3.  **Configures Networking:** Deploys a CloudFront distribution to serve the site globally via HTTPS, using OAC (Origin Access Control) to securely fetch files from S3.
+4.  **Manages DNS:** Automatically validates SSL certificates via ACM and creates DNS "A" records in Route53 to point the custom domain to the CDN.
+5.  **Deploys Backend:** Zips the Python code, creates the Lambda function, and sets up an API Gateway endpoint that triggers the function.
+6.  **Initializes Database:** Creates a DynamoDB table with on-demand capacity to store visitor counts cost-effectively.
+
 ## Architecture
 
 The infrastructure deploys a serverless full-stack application on AWS:
