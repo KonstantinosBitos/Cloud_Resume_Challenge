@@ -54,4 +54,4 @@ This project is a full-stack serverless application designed for scalability, se
 **Author:** Konstantinos Bitos
 * **Email:** [bitoskostas1@gmail.com](mailto:bitoskostas1@gmail.com)
 * **Medium:** [@bitoskostas1](https://medium.com/@bitoskostas1)
-* **LinkedIn** [Konstantinos Bitos](https://www.linkedin.com/in/konstantinosbitos/)
+* **LinkedIn:** [Konstantinos Bitos](https://www.linkedin.com/in/konstantinosbitos/)
