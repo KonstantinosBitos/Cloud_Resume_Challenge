@@ -20,5 +20,5 @@ The website is a static site deployed on AWS using a serverless architecture:
 ## Deployment
 
 The deployment is automated via GitHub Actions. When changes are pushed to the `main` branch:
-1.  Files are synced to the S3 bucket.
-2.  The CloudFront cache is invalidated to ensure users see the latest version immediately.
+* Files are synced to the S3 bucket.
+* The CloudFront cache is invalidated to ensure users see the latest version immediately.
