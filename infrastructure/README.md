@@ -22,7 +22,7 @@ The infrastructure deploys a serverless full-stack application on AWS:
     * **IAM Roles:** Least-privilege roles for GitHub Actions (OIDC) and Lambda execution.
     * **Remote State:** Terraform state is stored securely in an S3 bucket with DynamoDB locking.
 
-## 📂 File Structure
+## File Structure
 
 * **`main.tf`**: Provider configuration (AWS) and backend setup.
 * **`frontend.tf`**: S3, CloudFront, and ACM resources.
