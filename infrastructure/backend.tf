@@ -75,7 +75,7 @@ resource "aws_lambda_function" "visitor_count_func_v2" {
   filename         = data.archive_file.lambda_zip_v2.output_path
   source_code_hash = data.archive_file.lambda_zip_v2.output_base64sha256          
 
-  # IMPORTANT: Pass the new table name to Python
+  # Pass the new table name to Python
   environment {
     variables = {
       TABLE_NAME = aws_dynamodb_table.visitor_counter_v2.name
@@ -111,14 +111,14 @@ resource "aws_apigatewayv2_integration" "apigw_lambda_v2" {
   payload_format_version = "2.0"
 }
 
-# Define the Route (e.g., POST /visitor_count) - V2
+# Define the Route (POST / count) - V2
 resource "aws_apigatewayv2_route" "count_route_v2" {
   api_id    = aws_apigatewayv2_api.http_api_v2.id
   route_key = "POST /visitor_count"
   target    = "integrations/${aws_apigatewayv2_integration.apigw_lambda_v2.id}"
 }
 
-# Permission: Allow API Gateway V2 to invoke the Lambda V2
+# Allow API Gateway V2 to invoke the Lambda V2
 resource "aws_lambda_permission" "apigw_invoke_v2" {
   statement_id  = "AllowExecutionFromAPIGateway_v2"
   action        = "lambda:InvokeFunction"

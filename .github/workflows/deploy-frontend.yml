@@ -1,4 +1,4 @@
-name: Deploy Frontend (V2)
+name: Deploy Frontend
 
 on:
   push:
@@ -21,20 +21,19 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
-          # Use the secret
+          # Use the secret to assume the role
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: eu-north-1
 
       - name: Deploy to S3
         env:
-          # Use the secret
+          # Use the secret for the bucket name
           BUCKET_NAME: ${{ secrets.AWS_BUCKET_NAME }} 
         run: |
           aws s3 sync ./frontend s3://$BUCKET_NAME --delete
 
       - name: Invalidate CloudFront Cache
         run: |
-          # CHANGED: Now looks for the V2 domain alias
           DIST_ID=$(aws cloudfront list-distributions --query "DistributionList.Items[?Aliases.Items!=null] | [?contains(Aliases.Items, 'konstantinos.space')].Id | [0]" --output text)
           
           if [ "$DIST_ID" != "None" ] && [ "$DIST_ID" != "" ]; then

@@ -1,12 +1,12 @@
-name: Deploy Backend & Infrastructure (V2)
+name: Deploy Backend & Infrastructure 
 
 on:
   push:
     branches:
       - main  
     paths:
-      - 'infrastructure-v2/**' # Watches the new folder
-      - 'backend/**'           # Watches the Python code
+      - 'infrastructure/**' 
+      - 'backend/**'           
 
 permissions:
   id-token: write 
@@ -28,7 +28,7 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
-          # Use the secret we updated
+          # Use the secrets to assume the role
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }} 
           aws-region: us-east-1
 
@@ -47,13 +47,12 @@ jobs:
       # Capture the API URL from Terraform output
       - name: Get API URL
         id: get_url
-        # looking for 'api_endpoint_v2' now
         run: |
           echo "API_URL=$(terraform output -raw api_endpoint_v2)" >> $GITHUB_ENV
 
       # Run the Python Smoke Test
       - name: Run Smoke Tests
-        working-directory: ./backend # Adjust path relative to infrastructure-v2
+        working-directory: ./backend # Adjust path 
         run: |
           pip install requests
           python Tests/Smoke_test.py

@@ -30,7 +30,7 @@ provider "aws" {
   }
 }
 
-# Special provider for CloudFront Certificates 
+# Special provider for CloudFront Certificates - this is the default region for the certificates
 provider "aws" {
   alias  = "us_east_1"
   region = "us-east-1"

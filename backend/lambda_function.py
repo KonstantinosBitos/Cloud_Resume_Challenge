@@ -3,15 +3,15 @@ import boto3
 import os
 from decimal import Decimal
 
-# Initialize DynamoDB
+# Initialize DynamoDB without hard coding table name
 dynamodb = boto3.resource('dynamodb')
 table_name = os.environ.get('TABLE_NAME')
 table = dynamodb.Table(table_name)
 
 def lambda_handler(event, context):
     try:
-        #Update the count (Atomic Increment)
-        # 'if_not_exists' initializing the counter if it's missing
+        # Update the count or initialize if it doesn't exist
+        # Views is a taken keyword 
         response = table.update_item(
             Key={'id': '1'},
             UpdateExpression='SET #v = if_not_exists(#v, :zero) + :val',
@@ -40,8 +40,9 @@ def lambda_handler(event, context):
             'body': json.dumps({'count': views}) 
         }
 
+    # Show error in CloudWatch logs if something goes wrong
     except Exception as e:
-        print(f"ERROR: {str(e)}") # show up in CloudWatch logs
+        print(f"ERROR: {str(e)}") 
         return {
             'statusCode': 500,
             'headers': {

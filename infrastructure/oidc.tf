@@ -2,7 +2,7 @@
 data "aws_caller_identity" "current" {}
 
 locals {
-  # This constructs the ARN of the provider that already exists
+  # Construct the ARN of the provider that already exists
   oidc_provider_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/token.actions.githubusercontent.com"
 }
 
@@ -21,7 +21,7 @@ resource "aws_iam_role" "github_deploy_role_v2" {
         }
         Condition = {
           StringLike = {
-            # This allows any branch (*) in your repo to assume this role
+            # Any branch (*) in the repo can assume this role
             "token.actions.githubusercontent.com:sub" = "repo:KonstantinosBitos/Cloud_Resume_Challenge:*"
           }
         }
@@ -34,7 +34,7 @@ resource "aws_iam_role" "github_deploy_role_v2" {
   }
 }
 
-# Attach Admin Access to the V2 Role
+# Attach Admin Access to the Role
 resource "aws_iam_role_policy_attachment" "github_admin_v2" {
   role       = aws_iam_role.github_deploy_role_v2.name
   policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"

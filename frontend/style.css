@@ -22,7 +22,6 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Container: Increased width to 950px */
 .container {
     max-width: 950px; 
     margin: 0 auto;
@@ -102,7 +101,7 @@ li {
 /* Project Links Styling */
 .project-link {
     margin-top: 5px;
-    margin-left: 10px; /* Aligns with bullet points */
+    margin-left: 10px; /* Align with bullet points */
     font-weight: 500;
 }
 

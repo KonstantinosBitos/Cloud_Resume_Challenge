@@ -3,7 +3,6 @@ fetch('https://jx16zysyf2.execute-api.eu-north-1.amazonaws.com/visitor_count', {
 })
     .then(response => response.json())
     .then(data => {
-        // Update the website
         document.getElementById('visitor-counter').innerText = data.count;
     })
     .catch(error => {

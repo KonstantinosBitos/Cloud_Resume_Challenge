@@ -30,10 +30,10 @@ resource "aws_cloudfront_distribution" "cf_dist_v2" {
     origin_access_control_id = aws_cloudfront_origin_access_control.cf_s3_oac_v2.id
   }
 
-  # Once V2 is perfect, you can swap this back to the main domain.
+  # Swap between the v2.konstantinos.space and konstantinos.space domains for testing
   aliases = ["konstantinos.space"]
 
-  # References the V2 certificate 
+  # Reference the certificate 
   viewer_certificate {
     acm_certificate_arn      = aws_acm_certificate.cert_v2.arn
     ssl_support_method       = "sni-only"
@@ -70,7 +70,7 @@ resource "aws_cloudfront_distribution" "cf_dist_v2" {
   }
 }
 
-# Bucket Policy (Allow CloudFront V2 to read S3 V2)
+# Allow CloudFront to read S3
 resource "aws_s3_bucket_policy" "allow_cloudfront_v2" {
   bucket = aws_s3_bucket.resume_bucket_v2.id
   policy = jsonencode({
