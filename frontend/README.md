@@ -2,7 +2,7 @@
 
 This directory contains the frontend code for my cloud-hosted resume, built as part of the [Cloud Resume Challenge](https://cloudresumechallenge.dev/).
 
-**Live Site:** [https://konstantinos.space](https://konstantinos.space)
+**Live Site:** [konstantinos.space](https://konstantinos.space)
 
 ## Architecture
 
