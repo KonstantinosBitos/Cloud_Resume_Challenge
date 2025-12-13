@@ -1,4 +1,4 @@
-# Infrastructure (Terraform)
+# Cloud Resume Challenge - Infrastructure (Terraform)
 
 This directory contains the Infrastructure as Code (IaC) for my cloud hosted resume. 
 It uses Terraform to provision and manage all AWS resources automatically, ensuring the environment is reproducible, version-controlled, and consistent.
