@@ -4,7 +4,7 @@ This directory contains the frontend code for my cloud-hosted resume, built as p
 
 **Live Site:** [https://konstantinos.space](https://konstantinos.space)
 
-## 🏗 Architecture
+## Architecture
 
 The website is a static site deployed on AWS using a serverless architecture:
 
@@ -13,13 +13,13 @@ The website is a static site deployed on AWS using a serverless architecture:
 * **AWS Certificate Manager (ACM):** Provisions the SSL/TLS certificate for secure connections.
 * **Origin Access Control (OAC):** Restricts S3 bucket access so content is only viewable through CloudFront (no direct public access).
 
-## 🛠 Tech Stack
+## Tech Stack
 
 * **Frontend:** HTML5, CSS3, JavaScript (Vanilla)
 * **Infrastructure:** AWS S3, CloudFront, Route 53
 * **CI/CD:** GitHub Actions (Automatic invalidation and sync on push)
 
-## 🚀 Deployment
+## Deployment
 
 The deployment is automated via GitHub Actions. When changes are pushed to the `main` branch:
 1.  Files are synced to the S3 bucket.
