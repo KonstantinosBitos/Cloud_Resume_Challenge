@@ -22,33 +22,6 @@ The infrastructure deploys a serverless full-stack application on AWS:
     * **IAM Roles:** Least-privilege roles for GitHub Actions (OIDC) and Lambda execution.
     * **Remote State:** Terraform state is stored securely in an S3 bucket with DynamoDB locking.
 
-## 🚀 Prerequisites
-
-To deploy this infrastructure locally, you need:
-
-* [Terraform CLI](https://developer.hashicorp.com/terraform/downloads) (v1.0+)
-* [AWS CLI](https://aws.amazon.com/cli/) (Configured with Administrator access)
-
-## 🛠 Usage
-
-### 1. Initialization
-Initialize Terraform to download providers and configure the remote backend:
-```bash
-terraform init
-```
-
-### 2. Planning
-Preview the changes Terraform will make to your AWS account:
-```bash
-terraform plan
-```
-
-### 3. Deployment
-Apply the configuration to create or update resources:
-```bash
-terraform apply
-```
-
 ## 📂 File Structure
 
 * **`main.tf`**: Provider configuration (AWS) and backend setup.
