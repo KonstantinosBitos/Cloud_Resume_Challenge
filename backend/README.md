@@ -35,4 +35,13 @@ The deployment is automated via GitHub Actions. When changes are pushed to the `
 * The Python code is zipped into a deployment package.
 * Terraform applies the changes to AWS (updating the Lambda function or infrastructure).
 * A live smoke test runs against the API endpoint to ensure the system is healthy.
+  
+## File Structure
+
+* **`lambda_function.py`**: The main Python script containing the Lambda handler and logic to interact with DynamoDB.
+* **`tests/`**: Directory containing unit tests and integration tests.
+    * **`test_lambda.py`**: Test cases to verify the Lambda logic.
+
+
+
 
