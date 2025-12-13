@@ -39,7 +39,7 @@ The deployment is automated via GitHub Actions. When changes are pushed to the `
 ## File Structure
 
 * **`lambda_function.py`**: The main Python script containing the Lambda handler and logic to interact with DynamoDB.
-* **`Tests/`**: Directory containing unit tests and integration tests.
+* **`Tests/`**: Directory containing tests.
     * **`Smoke_test.py`**: Test cases to verify the Lambda logic.
 
 
