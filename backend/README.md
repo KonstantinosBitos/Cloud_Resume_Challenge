@@ -2,7 +2,6 @@
 
 This directory contains the backend code for my cloud-hosted resume, that is used to power the visitor counter for the website.
 
-
 ## Architecture
 
 The backend follows a completely serverless microservices pattern:
@@ -15,7 +14,7 @@ The backend follows a completely serverless microservices pattern:
 
 * **Language:** Python 3.9+
 * **AWS Services:** Lambda, DynamoDB, API Gateway
-* **Testing:** `unittest` (Smoke tests running in CI/CD)
+* **Testing:** Smoke tests running in CI/CD
 
 ## API Usage
 
