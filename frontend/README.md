@@ -13,7 +13,7 @@ The website is a static site deployed on AWS using a serverless architecture:
 
 ## Tech Stack
 
-* **Frontend:** HTML5, CSS3, JavaScript (Vanilla)
+* **Frontend:** HTML5, CSS3, JavaScript
 * **Infrastructure:** AWS S3, CloudFront, Route 53
 * **CI/CD:** GitHub Actions (Automatic invalidation and sync on push)
 
