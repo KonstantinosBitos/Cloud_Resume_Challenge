@@ -27,7 +27,7 @@ This project is a full-stack serverless application designed for scalability, se
     * **Terraform:** Infrastructure as Code (IaC) to provision all resources.
     * **GitHub Actions:** CI/CD pipelines for testing (Python/unittest) and deployment.
 
-## 📂 Project Structure
+## Project Structure
 
 * **[`frontend/`](./frontend)**
     * `index.html`: Main resume content and structure.
@@ -50,7 +50,7 @@ This project is a full-stack serverless application designed for scalability, se
     * `deploy-frontend.yml`: Pipeline to sync S3 and invalidate CloudFront.
     * `deploy-backend.yml`: Pipeline to test Python code and apply Terraform.
 
-## 📬 Connect
+## Connect
 
 **Author:** Konstantinos Bitos
 * **Email:** [bitoskostas1@gmail.com](mailto:bitoskostas1@gmail.com)
