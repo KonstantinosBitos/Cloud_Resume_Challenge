@@ -38,10 +38,10 @@ class TestAPISmoke(unittest.TestCase):
             self.fail(f"API did not return valid JSON. Response text: {response.text}")
 
         # Check Data - There should be VisitorCount key
-        self.assertIn('count', data, "Response JSON is missing the 'VisitorCount' key")
+        self.assertIn('count', data, "Response JSON is missing the 'count' key")
         
         # Make sure the count is int
-        self.assertIsInstance(data['count'], int, "Visitor count is not an integer")
+        self.assertIsInstance(data['count'], int, "count is not an integer")
 
         print(f"\nSUCCESS! Visitor count is: {data['count']}")
 
