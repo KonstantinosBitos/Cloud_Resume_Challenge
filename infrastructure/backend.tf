@@ -111,7 +111,7 @@ resource "aws_apigatewayv2_integration" "apigw_lambda_v2" {
   payload_format_version = "2.0"
 }
 
-# Define the Route (POST / count) - V2
+# Define the Route (POST / visitor_count) - V2
 resource "aws_apigatewayv2_route" "count_route_v2" {
   api_id    = aws_apigatewayv2_api.http_api_v2.id
   route_key = "POST /visitor_count"
