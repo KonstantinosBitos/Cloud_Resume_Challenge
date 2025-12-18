@@ -11,8 +11,8 @@ The backend follows a completely serverless microservices pattern:
     * Hashing visitor IP addresses (SHA-256) for privacy.
     * Checking the visitor tracking table to determine uniqueness.
 * **Amazon DynamoDB:** Utilizes two separate tables:
-    1.  **`VisitorCounter_v2`:** Stores the persistent atomic counters for `total` views and `unique` visitors.
-    2.  **`VisitorTracking_v2`:** Stores hashed visitor IDs with a Time-To-Live (TTL) attribute to track unique sessions (24-hour window) without storing PII.
+    *  **`VisitorCounter_v2`:** Stores the persistent atomic counters for `total` views and `unique` visitors.
+    *  **`VisitorTracking_v2`:** Stores hashed visitor IDs with a Time-To-Live (TTL) attribute to track unique sessions (24-hour window) without storing PII.
 * **Amazon API Gateway (HTTP API):** Provides a public, secure HTTPS endpoint (`POST /visitor_count`) that connects the frontend to the backend.
 
 ## Tech Stack
