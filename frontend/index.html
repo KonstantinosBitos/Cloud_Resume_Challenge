@@ -6,13 +6,22 @@
     <title>Konstantinos Bitos - Cloud Resume</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .counter-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 2rem; 
+        }
+        .counter-box {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
     <div class="container">
 <header>
     <h1>Konstantinos Bitos</h1>
-    <!-- <p class="subtitle">Cloud Engineer & Data Analyst</p> -->
     <p class="subtitle"></p> 
     <div class="contact-info">
         <a href="mailto:bitoskostas1@gmail.com"><i class="fas fa-envelope"></i> bitoskostas1@gmail.com</a>
@@ -151,8 +160,17 @@
 
         <footer>
             <div class="counter-container">
-                <p>Visitor Count</p>
-                <span id="visitor-counter">Loading...</span>
+                <div class="counter-wrapper">
+                    <div class="counter-box">
+                        <p>Total Views</p>
+                        <span id="total-counter">Loading...</span>
+                    </div>
+                    
+                    <div class="counter-box">
+                        <p>Unique Visitors</p>
+                        <span id="unique-counter">Loading...</span>
+                    </div>
+                </div>
             </div>
         </footer>
     </div>

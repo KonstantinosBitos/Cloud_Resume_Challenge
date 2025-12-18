@@ -5,7 +5,7 @@ data "archive_file" "lambda_zip_v2" {
   output_path = "../backend/func_v2.zip"
 }
 
-# Existing DynamoDB Table - V2
+# DynamoDB Table - V2 (Stores the Counts)
 resource "aws_dynamodb_table" "visitor_counter_v2" {
   name         = "VisitorCounter_v2" 
   billing_mode = "PAY_PER_REQUEST"
@@ -21,9 +21,56 @@ resource "aws_dynamodb_table" "visitor_counter_v2" {
   }
 }
 
+# Seed the Counter Table with Initial Items to ensure the 'total' and 'unique' keys exist for the Lambda to update
+resource "aws_dynamodb_table_item" "init_total_count" {
+  table_name = aws_dynamodb_table.visitor_counter_v2.name
+  hash_key   = aws_dynamodb_table.visitor_counter_v2.hash_key
+
+  item = <<ITEM
+{
+  "id": {"S": "total"},
+  "views": {"N": "0"}
+}
+ITEM
+}
+
+resource "aws_dynamodb_table_item" "init_unique_count" {
+  table_name = aws_dynamodb_table.visitor_counter_v2.name
+  hash_key   = aws_dynamodb_table.visitor_counter_v2.hash_key
+
+  item = <<ITEM
+{
+  "id": {"S": "unique"},
+  "views": {"N": "0"}
+}
+ITEM
+}
+
+# Extra DynamoDB Table (For Tracking Unique Visitor IPs)
+resource "aws_dynamodb_table" "visitor_tracking_v2" {
+  name             = "VisitorTracking_v2"
+  billing_mode     = "PAY_PER_REQUEST"
+  hash_key         = "visitor_id"
+
+  attribute {
+    name = "visitor_id"
+    type = "S"
+  }
+
+  # Enable TTL so visitor records expire automatically after 24h
+  ttl {
+    attribute_name = "expires_at"
+    enabled        = true
+  }
+
+  tags = {
+    Name = "VisitorTrackingTable-v2"
+  }
+}
+
 # IAM Role for Lambda - V2
 resource "aws_iam_role" "lambda_exec_v2" {
-  name = "VisitorCounterRole_v2"       
+  name = "VisitorCounterRole_v2"        
   path = "/service-role/"
 
   assume_role_policy = jsonencode({
@@ -44,7 +91,7 @@ resource "aws_iam_role_policy_attachment" "lambda_logs_v2" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
-# Allow database access - V2
+# Allow database access - V2 
 resource "aws_iam_role_policy" "dynamodb_access_v2" {
   name = "VisitorCounterDynamoDBPolicy_v2"
   role = aws_iam_role.lambda_exec_v2.id
@@ -59,26 +106,30 @@ resource "aws_iam_role_policy" "dynamodb_access_v2" {
           "dynamodb:UpdateItem"
         ]
         Effect   = "Allow"
-        # Only allow access to the V2 table
-        Resource = aws_dynamodb_table.visitor_counter_v2.arn
+        # Allow access to BOTH the Counter table and the new Visitor Tracking table
+        Resource = [
+          aws_dynamodb_table.visitor_counter_v2.arn,
+          aws_dynamodb_table.visitor_tracking_v2.arn
+        ]
       }
     ]
   })
 }
 
-# Lambda Function - V2
+# Lambda Function - V2 
 resource "aws_lambda_function" "visitor_count_func_v2" {
-  function_name    = "VisitorCountertoDynamoDB_v2" # 
+  function_name    = "VisitorCountertoDynamoDB_v2"
   role             = aws_iam_role.lambda_exec_v2.arn
-  handler          = "lambda_function.lambda_handler"            
-  runtime          = "python3.9"                       
+  handler          = "lambda_function.lambda_handler"
+  runtime          = "python3.9"
   filename         = data.archive_file.lambda_zip_v2.output_path
-  source_code_hash = data.archive_file.lambda_zip_v2.output_base64sha256          
+  source_code_hash = data.archive_file.lambda_zip_v2.output_base64sha256
 
-  # Pass the new table name to Python
+  # Pass table names to Python
   environment {
     variables = {
-      TABLE_NAME = aws_dynamodb_table.visitor_counter_v2.name
+      TABLE_NAME       = aws_dynamodb_table.visitor_counter_v2.name
+      VISITOR_TABLE_NAME = aws_dynamodb_table.visitor_tracking_v2.name
     }
   }
 }

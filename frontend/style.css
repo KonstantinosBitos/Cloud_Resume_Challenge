@@ -126,7 +126,7 @@ h2 {
     margin-top: 0;
 }
 
-/* --- WORK & EDUCATION (NO BOXES) --- */
+/* --- WORK & EDUCATION --- */
 .job, .school {
     background: transparent;
     border: none;
@@ -134,12 +134,13 @@ h2 {
     margin-bottom: 20px;
 }
 
-/* --- PROJECT ENTRIES (NO BOXES, BUT WITH SPACING) --- */
+/* --- PROJECT ENTRIES --- */
 .project-entry {
     margin-bottom: 40px; /* Gap between projects */
 }
 
 /* Remove default styling from lists */
+ul {
     list-style-position: outside;
     margin-left: 18px;
     color: var(--text-muted);
@@ -202,7 +203,7 @@ h3 {
     line-height: 1.5;
 }
 
-/* --- FOOTER & COUNTER --- */
+/* --- FOOTER & COUNTERS --- */
 footer {
     grid-column: 1 / -1; /* Spans full width */
     margin-top: 50px;
@@ -215,26 +216,36 @@ footer {
 .counter-container {
     text-align: center;
     background: var(--card-bg);
-    padding: 15px 30px;
-    border-radius: 50px; /* Pill shape */
+    padding: 20px 40px;
+    border-radius: 12px;
     border: 1px solid var(--border);
     box-shadow: 0 0 15px rgba(56, 189, 248, 0.1); /* Subtle neon glow */
 }
 
-.counter-container p {
+/* Wrapper for the two counters to sit side-by-side */
+.counter-wrapper {
+    display: flex;
+    gap: 40px; /* Space between the two counters */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Individual counter styling */
+.counter-box p {
     margin: 0;
     font-size: 0.8em;
     text-transform: uppercase;
     letter-spacing: 1px;
     color: var(--text-muted);
+    margin-bottom: 5px;
 }
 
-#visitor-counter {
+.counter-box span {
     display: block;
-    font-size: 1.5em;
+    font-size: 1.8em;
     font-weight: 700;
     color: var(--accent);
-    margin-top: 5px;
+    line-height: 1;
 }
 
 /* --- MOBILE TWEAKS --- */
@@ -249,5 +260,11 @@ footer {
     
     .job-header {
         flex-direction: column;
+    }
+
+    /* Stack counters on mobile */
+    .counter-wrapper {
+        flex-direction: column;
+        gap: 20px;
     }
 }
