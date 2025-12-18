@@ -6,15 +6,21 @@ This directory contains the backend code for my cloud-hosted resume, that is use
 
 The backend follows a completely serverless microservices pattern:
 
-* **AWS Lambda (Python):** A function that executes the logic to retrieve and update the visitor count.
-* **Amazon DynamoDB:** A NoSQL database table (`VisitorCounter_v2`) that stores the persistent view count atomically.
-* **Amazon API Gateway (HTTP API):** Provides a public HTTPS endpoint to trigger the Lambda function from the frontend.
+* **AWS Lambda (Python):** Executed via API Gateway, this function handles the logic for:
+    * Atomically incrementing the total view counter.
+    * Hashing visitor IP addresses (SHA-256) for privacy.
+    * Checking the visitor tracking table to determine uniqueness.
+* **Amazon DynamoDB:** Utilizes two separate tables:
+    1.  **`VisitorCounter_v2`:** Stores the persistent atomic counters for `total` views and `unique` visitors.
+    2.  **`VisitorTracking_v2`:** Stores hashed visitor IDs with a Time-To-Live (TTL) attribute to track unique sessions (24-hour window) without storing PII.
+* **Amazon API Gateway (HTTP API):** Provides a public, secure HTTPS endpoint (`POST /visitor_count`) that connects the frontend to the backend.
 
 ## Tech Stack
 
-* **Language:** Python 3.9+
-* **AWS Services:** Lambda, DynamoDB, API Gateway
-* **Testing:** Smoke tests running in CI/CD
+* **Language:** Python 3.9+ 
+* **Infrastructure as Code:** Terraform
+* **AWS Services:** Lambda, DynamoDB, API Gateway, CloudWatch
+* **CI/CD:** GitHub Actions
 
 ## API Usage
 
@@ -23,7 +29,8 @@ The backend follows a completely serverless microservices pattern:
 **Response:**
 ```json
 {
-  "count": 42
+  "count": 1250,
+  "unique_count": 340
 }
 ```
 
