@@ -40,7 +40,7 @@ def lambda_handler(event, context):
 
     # TTL: 24 hours from now 
     now = int(time.time())
-    ttl_window = 86400  
+    ttl_window = 30 * 86400  # 30 days  
     expires_at = now + ttl_window
 
     unique_count = 0
