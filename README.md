@@ -7,7 +7,7 @@ This project transforms a traditional resume into a serverless web application h
 ## Quick Links
 
 * **Live Website:** [konstantinos.space](https://konstantinos.space)
-* **Blog Post:** [Coming Soon]
+* **Blog Post:** [Medium Article](https://medium.com/codex/my-journey-completing-the-cloud-resume-challenge-71e885564039)
 
 ## Architecture
 
@@ -21,7 +21,7 @@ This project is a full-stack serverless application designed for scalability, se
 * **Backend:**
     * **API Gateway:** Exposes a secure HTTP API endpoint.
     * **AWS Lambda (Python):** Serverless compute to handle the visitor counter logic.
-    * **DynamoDB:** NoSQL database for atomic visitor counting.
+    * **DynamoDB:** NoSQL database for atomic total and unique visitor counting.
 
 * **Automation:**
     * **Terraform:** Infrastructure as Code (IaC) to provision all resources.
