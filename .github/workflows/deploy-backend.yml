@@ -20,7 +20,6 @@ jobs:
       run:
         working-directory: ./infrastructure
     steps:
-      # Checkout the code
       - name: Checkout Code
         uses: actions/checkout@v3
 
@@ -32,15 +31,12 @@ jobs:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }} 
           aws-region: us-east-1
 
-      # Install Terraform
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
-      # Initialize Terraform 
       - name: Terraform Init
         run: terraform init
 
-      # Apply Changes
       - name: Terraform Apply
         run: terraform apply -auto-approve
 
